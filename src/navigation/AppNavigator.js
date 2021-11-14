@@ -15,6 +15,10 @@ import CardTransition from '../screens/Reanimated/YouTube/CardTransition';
 import Accordion from '../screens/Reanimated/YouTube/Accordion/Accordion';
 import SortableScrollView from '../screens/Reanimated/YouTube/SortableScrollView/SortableScrollView';
 import MapView from '../screens/Reanimated/YouTube/GoogleMapsAnimation/MapView';
+import AnimateColor from '../screens/Reanimated/YouTube/AnimateColor';
+import ListParent from '../screens/ListAnimations/ListParent';
+import DragableList from '../screens/ListAnimations/DragableList/DragableList';
+import DragableFlatlist from '../screens/ListAnimations/DragableList/DragableFlatlist';
 
 const {height, width} = Dimensions.get('window');
 
@@ -85,6 +89,34 @@ const AppNavigator = () => {
             <ReanimatedStack.Screen
                 name="MapView"
                 component={MapView}
+                options={({navigation}) => ({
+                    headerMode: 'none'
+                })}
+            />
+            <ReanimatedStack.Screen
+                name="AnimateColor"
+                component={AnimateColor}
+                options={({navigation}) => ({
+                    headerMode: 'none'
+                })}
+            />
+            <ReanimatedStack.Screen
+                name="ListParent"
+                component={ListParent}
+                options={({navigation}) => ({
+                    headerMode: 'none'
+                })}
+            />
+            <ReanimatedStack.Screen
+                name="DragableList"
+                component={DragableList}
+                options={({navigation}) => ({
+                    headerMode: 'none'
+                })}
+            />
+            <ReanimatedStack.Screen
+                name="DragableFlatlist"
+                component={DragableFlatlist}
                 options={({navigation}) => ({
                     headerMode: 'none'
                 })}

@@ -19,17 +19,20 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.2",
+    "react-native-draggable-flatlist": "^3.0.2",
+    "react-native-drax": "^0.9.1",
     "react-native-gesture-handler": "~1.10.2",
+    "react-native-maps": "0.28.0",
     "react-native-reanimated": "~2.2.0",
     "react-native-redash": "^16.2.2",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "~3.8.0",
     "react-native-svg": "12.1.1",
-    "react-native-web": "0.17.1",
-    "react-native-maps": "0.28.0"
+    "react-native-web": "0.17.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@types/react-native": "^0.66.2"
   },
   "private": true
 }

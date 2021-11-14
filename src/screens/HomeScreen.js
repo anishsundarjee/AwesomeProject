@@ -10,13 +10,17 @@ const HomeScreen = ({navigation}) => {
                 title="Reanimated"
                 onPress={() => navigation.push('AnimationParent')}
             />
+            <Button
+                title="List Animations"
+                onPress={() => navigation.push('ListParent')}
+            />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     center: {
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
     },
     container: {

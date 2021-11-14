@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, SafeAreaView, ScrollView} from 'react-native';
+import {StyleSheet, ScrollView} from 'react-native';
 import Colors from '../../constants/Colors';
 import Button from '../../components/Button';
 
@@ -35,6 +35,10 @@ const SimpleAnimation = ({navigation}) => {
                 <Button
                     title="Google Maps Animation"
                     onPress={() => navigation.push('MapView')}
+                />
+                <Button
+                    title="Color Animation"
+                    onPress={() => navigation.push('AnimateColor')}
                 />
             </ScrollView>
     );
