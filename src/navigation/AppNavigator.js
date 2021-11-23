@@ -1,9 +1,12 @@
 import React from 'react';
 import {Dimensions, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+// import {createStackNavigator} from '@react-navigation/stack';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import { useDispatch, useSelector } from 'react-redux';
+import {authUser} from '../redux/actions/authAction'
 
 //Stack screens
 import HomeScreen from '../screens/HomeScreen';
@@ -19,17 +22,36 @@ import AnimateColor from '../screens/Reanimated/YouTube/AnimateColor';
 import ListParent from '../screens/ListAnimations/ListParent';
 import DragableList from '../screens/ListAnimations/DragableList/DragableList';
 import DragableFlatlist from '../screens/ListAnimations/DragableList/DragableFlatlist';
+//AuthStack
+import Login from '../screens/Auth/Login'
+import AuthCenter from '../screens/Auth/AuthCenter'
+import SignUp from '../screens/Auth/SignUp'
+import Main from '../screens/sharedElementAnimations/Basic/Main';
+import Detail from '../screens/sharedElementAnimations/Basic/Detail';
 
 const {height, width} = Dimensions.get('window');
 
-const ReanimatedStack = createStackNavigator();
+const ReanimatedStack = createSharedElementStackNavigator();
+const AuthStack = createSharedElementStackNavigator();
 const Tabs = createBottomTabNavigator();
 
 const AppNavigator = () => {
     const navigationRef = React.useRef();
+    const LoggedInUser = useSelector(state => state.authReducer.loggedInUser);
+
+    const SharedElementsOptions = {
+        headerBackTitleVisible: false,
+        cardStyleInterpolator: ({ current: { progress } }) => {
+          return {
+            cardStyle: {
+              opacity: progress
+            }
+          };
+        }
+      };
 
     const ReanimatedStackScreen = () => (
-        <ReanimatedStack.Navigator initialRouteName="Home">
+        <ReanimatedStack.Navigator initialRouteName="Home" headerMode="none">
             <ReanimatedStack.Screen
                 name="Home"
                 component={HomeScreen}
@@ -121,12 +143,59 @@ const AppNavigator = () => {
                     headerMode: 'none'
                 })}
             />
+            {/* Shared Element Transitions */}
+            <ReanimatedStack.Screen
+                name="Main"
+                component={Main}
+                options={({navigation}) => ({
+                    headerMode: 'none'
+                })}
+            />
+            <ReanimatedStack.Screen
+                name="Detail"
+                component={Detail}
+                options={() => SharedElementsOptions}
+            />
         </ReanimatedStack.Navigator>
     );
 
+    const AuthStackScreen = () => (
+        <AuthStack.Navigator initialRouteName='AuthCenter'>
+            <AuthStack.Screen 
+                name="AuthCenter"
+                component={AuthCenter}
+                options={({navigation}) => ({
+                    headerMode: 'none'
+                })}
+            />
+            <AuthStack.Screen 
+                name="Login"
+                component={Login}
+                options={({navigation}) => ({
+                    headerMode: 'none'
+                })}
+            />
+            <AuthStack.Screen 
+                name="SignUp"
+                component={SignUp}
+                options={({navigation}) => ({
+                    headerMode: 'none'
+                })}
+            />
+        </AuthStack.Navigator>
+    )
+
+    React.useState(()=> {
+        if(LoggedInUser === null) {
+            console.log('user : ',LoggedInUser);
+        }
+    },[]);
+
     return (
         <NavigationContainer ref={navigationRef}>
-            <ReanimatedStackScreen />
+            {
+                LoggedInUser === null ? <AuthStackScreen /> : <ReanimatedStackScreen />
+            }
         </NavigationContainer>
     );
 };

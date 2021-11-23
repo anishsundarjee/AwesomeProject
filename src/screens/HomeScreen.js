@@ -14,6 +14,10 @@ const HomeScreen = ({navigation}) => {
                 title="List Animations"
                 onPress={() => navigation.push('ListParent')}
             />
+            <Button
+                title="Shared Element Transitions"
+                onPress={() => navigation.push('Main')}
+            />
         </View>
     );
 };
